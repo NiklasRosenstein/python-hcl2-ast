@@ -32,20 +32,20 @@ class ToAstTransformer(DictTransformer):  # type: ignore[misc]
 
     # DictTransformer
 
-    def unary_op(self, args: t.List[t.Any]) -> str:
-        return UnaryOp(str(args[0]), args[1])
+    def unary_op(self, args: t.List[t.Any]) -> UnaryOp:
+        return UnaryOp(str(args[0]), args[1])  # type: ignore[arg-type]
 
     def binary_term(self, args: t.List[t.Any]) -> t.List[t.Any]:
         return args
 
-    def binary_op(self, args: t.List[t.Any]) -> str:
+    def binary_op(self, args: t.List[t.Any]) -> BinaryOp:
         assert len(args) == 2
-        return BinaryOp(str(args[1][0]), args[0], args[1][1])
+        return BinaryOp(str(args[1][0]), args[0], args[1][1])  # type: ignore[arg-type]
 
-    def get_attr(self, args: t.List[t.Any]) -> str:
+    def get_attr(self, args: t.List[t.Any]) -> Expression:
         return self.to_expression(args[0])
 
-    def get_attr_expr_term(self, args: t.List[t.Any]) -> str:
+    def get_attr_expr_term(self, args: t.List[t.Any]) -> GetAttr:
         assert len(args) == 2, args
         if isinstance(args[0], Expression):
             on = args[0]
@@ -64,7 +64,7 @@ class ToAstTransformer(DictTransformer):  # type: ignore[misc]
             return Literal(self.strip_quotes(args[0].value))
         return super().expr_term(args)
 
-    def identifier(self, value: t.List[Token]) -> Identifier:
+    def identifier(self, value: t.List[Token]) -> Expression:
         # Making identifier a token by capitalizing it to IDENTIFIER
         # seems to return a token object instead of the str
         # So treat it like a regular rule
@@ -100,9 +100,11 @@ class ToAstTransformer(DictTransformer):  # type: ignore[misc]
         if isinstance(args[-1], str):
             args.append({})
 
-        args = [self.to_expression(self.strip_quotes(arg)) for arg in args[:-1]] + [args[-1]]
+        name = args[0].name
+        body = args[-1]
+        args = [self.to_expression(self.strip_quotes(arg)) for arg in args[1:-1]]
 
-        return Block(args[0].name, args[1:-1], args[-1])
+        return Block(name, args, body)
 
     def object(self, args: t.List[t.Any]) -> Object:
         args = self.strip_new_line_tokens(args)

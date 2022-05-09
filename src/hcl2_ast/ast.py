@@ -2,6 +2,7 @@ import dataclasses
 import textwrap
 import typing as t
 
+import typing_extensions as te
 from termcolor import colored
 
 LiteralValue = t.Union[None, bool, int, float, str]
@@ -116,13 +117,13 @@ class GetAttr(Expression):
 
 @dataclasses.dataclass
 class UnaryOp(Expression):
-    op: t.Literal["-", "!"]
+    op: te.Literal["-", "!"]
     expr: Expression
 
 
 @dataclasses.dataclass
 class BinaryOp(Expression):
-    op: t.Literal["==", "!=", "<", ">", "<=", ">=", "-", "*", "/", "%", "&&", "||", "+"]
+    op: te.Literal["==", "!=", "<", ">", "<=", ">=", "-", "*", "/", "%", "&&", "||", "+"]
     left: Expression
     right: Expression
 

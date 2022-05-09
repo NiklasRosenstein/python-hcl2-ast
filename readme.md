@@ -1,6 +1,6 @@
 # hcl2-ast
 
-A [HCL2][] parser based on [python-hcl2][] that produces an Abstract Syntax Tree.
+A [HCL2][] parser and evaluator based on [python-hcl2][] that produces an Abstract Syntax Tree.
 
   [HCL2]: https://github.com/hashicorp/hcl/blob/main/README.md
   [python-hcl2]: https://pypi.org/project/python-hcl2/
@@ -14,8 +14,8 @@ A [HCL2][] parser based on [python-hcl2][] that produces an Abstract Syntax Tree
 from hcl2_ast import parse_string
 
 module = parse_string("""
-  task "say-hello" {
-    to = "World"
+  hello {
+    name = "World"
   }
 """)
 
@@ -27,16 +27,17 @@ Outputs:
 ```py
 Module(body=[
   Block(
-    name='task',
-    args=[
-      'say-hello',
-    ],
+    name='hello',
+    args=[],
     body=[
-      Attribute(key='to', value=Literal(value='World')),
+      Attribute(key='name', value=Literal(value='World')),
     ]
   ),
 ])
 ```
+
+Check out [examples/evaluate.py](examples/evaluate.py) for an example on how to dynamically
+evaluate a HCL2 configuration AST.
 
 ## Compatibility
 
