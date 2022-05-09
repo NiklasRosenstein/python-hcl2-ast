@@ -1,4 +1,4 @@
-__version__ = "0.1.0"
+__version__ = "0.1.0.post1"
 
 from .api import parse_file, parse_string
 
