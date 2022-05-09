@@ -65,7 +65,6 @@ warn_unused_ignores = true
 profile = "black"
 line_length = 120
 combine_as_imports = true
-indent = "  "
 
 [tool.black]
 line-length = 120

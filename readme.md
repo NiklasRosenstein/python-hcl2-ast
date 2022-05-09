@@ -41,3 +41,7 @@ Module(body=[
 ## Compatibility
 
 hcl2-ast requires Python 3.6 or higher.
+
+## Known issues
+
+* No understanding of operator precedence in expressions (grouping with parentheses works as expected)

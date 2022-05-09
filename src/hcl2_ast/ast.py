@@ -68,6 +68,10 @@ class Literal(Expression):
 
     def __post_init__(self) -> None:
         assert isinstance(self.value, (type(None), bool, int, float, str)), self.value
+        if "Identifier" in str(self.value):
+            import pdb
+
+            pdb.set_trace()
 
 
 @dataclasses.dataclass
@@ -99,6 +103,30 @@ class FunctionCall(Expression):
         assert all(isinstance(arg, Expression) for arg in self.args), self.args
 
 
+@dataclasses.dataclass
+class Identifier(Expression):
+    name: str
+
+
+@dataclasses.dataclass
+class GetAttr(Expression):
+    on: t.Optional["Expression"]
+    name: str
+
+
+@dataclasses.dataclass
+class UnaryOp(Expression):
+    op: t.Literal["-", "!"]
+    expr: Expression
+
+
+@dataclasses.dataclass
+class BinaryOp(Expression):
+    op: t.Literal["==", "!=", "<", ">", "<=", ">=", "-", "*", "/", "%", "&&", "||", "+"]
+    left: Expression
+    right: Expression
+
+
 class Stmt(Node):
     """Base class for nodes that represent statements in HCL2."""
 
@@ -112,7 +140,7 @@ class Attribute(Stmt):
 @dataclasses.dataclass
 class Block(Stmt):
     name: str
-    args: t.List[str]
+    args: t.List[Expression]
     body: t.List[Stmt]
 
 
