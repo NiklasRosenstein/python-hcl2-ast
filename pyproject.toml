@@ -6,7 +6,7 @@ build-backend = "poetry.core.masonry.api"
 name = "hcl2-ast"
 version = "0.1.0"
 description = ""
-authors = ["Unknown <me@unknown.org>"]
+authors = ["Niklas Rosenstein <rosensteinniklas@gmail.com>"]
 license = "MIT"
 readme = "readme.md"
 packages = [{ include = "hcl2_ast", from = "src" }]
@@ -14,10 +14,10 @@ classifiers = []
 keywords = []
 
 [tool.poetry.urls]
-# "Bug Tracker" = ""
+"Bug Tracker" = "https://github.com/NiklasRosenstein/python-hcl2-ast/issues"
 # Documentation = ""
 # Homepage = ""
-# Repository = ""
+Repository = "https://github.com/NiklasRosenstein/python-hcl2-ast"
 
 [tool.poetry.dependencies]
 python = "^3.6"
