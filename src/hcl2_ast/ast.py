@@ -111,7 +111,7 @@ class Identifier(Expression):
 
 @dataclasses.dataclass
 class GetAttr(Expression):
-    on: t.Optional["Expression"]
+    on: Expression
     name: str
 
 
