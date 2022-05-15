@@ -1,5 +1,5 @@
 from hcl2_ast.api import parse_string
-from hcl2_ast.ast import Attribute, BinaryOp, Block, GetAttr, Identifier, Literal, Module, UnaryOp
+from hcl2_ast.ast import Attribute, BinaryOp, Block, FunctionCall, GetAttr, Identifier, Literal, Module, UnaryOp
 
 
 def test_can_parse_attribute_string() -> None:
@@ -78,3 +78,7 @@ def test_can_parse_binary_operator() -> None:
 
 def test_can_parse_unary_operator() -> None:
     assert parse_string("value = !addend") == Module([Attribute("value", UnaryOp("!", Identifier("addend")))])
+
+
+def test_can_parse_function_call() -> None:
+    assert parse_string("value = foo()") == Module([Attribute("value", FunctionCall("foo", []))])

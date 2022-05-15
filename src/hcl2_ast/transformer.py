@@ -86,7 +86,7 @@ class ToAstTransformer(DictTransformer):  # type: ignore[misc]
         if len(args) == 1:
             args.append([])
         args[1] = [self.to_expression(self.strip_quotes(arg)) for arg in args[1]]
-        return FunctionCall(args[0], args[1])
+        return FunctionCall(args[0].name, args[1])
 
     def body(self, args: t.List[t.Any]) -> t.List[t.Any]:
         return args
