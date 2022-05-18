@@ -1,6 +1,5 @@
 __version__ = "0.3.1"
 
-from .api import parse_file, parse_string
 from .ast import (
     Array,
     Attribute,
@@ -17,6 +16,7 @@ from .ast import (
     Stmt,
     UnaryOp,
 )
+from .parse import parse_file, parse_string
 
 __all__ = [
     "parse_file",

@@ -1,6 +1,6 @@
 import argparse
 
-from hcl2_ast.api import parse_file
+from hcl2_ast.parse import parse_file
 
 parser = argparse.ArgumentParser()
 parser.add_argument("file", type=argparse.FileType("r"))

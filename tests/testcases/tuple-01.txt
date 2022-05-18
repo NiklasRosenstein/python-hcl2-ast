@@ -1,0 +1,16 @@
+===
+value = ["42", 2, foo(), [null]]
+===
+Module(body=[
+  Attribute(
+    key='value',
+    value=Array(values=[
+      Literal(value='42'),
+      Literal(value=2),
+      FunctionCall(name='foo', args=[]),
+      Array(values=[
+        Literal(value=None),
+      ]),
+    ])
+  ),
+])

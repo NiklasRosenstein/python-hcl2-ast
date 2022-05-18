@@ -1,14 +1,9 @@
-import typing as t
+import warnings
 
-from hcl2.lark_parser import Lark_StandAlone  # type: ignore
+warnings.warn("Use hcl2_ast.parse instead of hcl2_ast.api", DeprecationWarning)
 
-from hcl2_ast.ast import Module
-from hcl2_ast.transformer import ToAstTransformer
+import sys  # noqa: E402
 
+from . import parse  # noqa: E402
 
-def parse_file(file: t.TextIO) -> Module:
-    return parse_string(file.read())
-
-
-def parse_string(text: str) -> Module:
-    return Module(Lark_StandAlone(transformer=ToAstTransformer()).parse(text + "\n"))
+sys.modules[__name__] = parse

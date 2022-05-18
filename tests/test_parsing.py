@@ -1,5 +1,5 @@
-from hcl2_ast.api import parse_string
 from hcl2_ast.ast import Attribute, BinaryOp, Block, FunctionCall, GetAttr, Identifier, Literal, Module, UnaryOp
+from hcl2_ast.parse import parse_string
 
 
 def test_can_parse_attribute_string() -> None:
